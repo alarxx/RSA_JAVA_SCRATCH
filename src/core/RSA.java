@@ -24,10 +24,10 @@ public class RSA {
     }
 
     public static RSA generateKeys(){
-        BigInteger p1 = Prime.generatePrime(13, 100);
+        BigInteger p1 = Prime.generatePrime(1_300_000, 1_000_000_000);
         BigInteger p2;
         do{
-            p2 = Prime.generatePrime(13, 100);
+            p2 = Prime.generatePrime(1_300_000, 1_000_000_000);
         }while(p2.equals(p1));
 
         BigInteger n = p1.multiply(p2);
@@ -50,7 +50,7 @@ public class RSA {
     }
 
     protected static BigInteger generate_e(BigInteger phi){
-        BigInteger e = BigInteger.valueOf(3);
+        BigInteger e = BigInteger.valueOf(15);
         while(!Euclid.GCD(e, phi).equals(BigInteger.ONE)){
             e = e.add(BigInteger.TWO);
         }
@@ -125,7 +125,7 @@ public class RSA {
     }
 
     public String sign(String msg){
-        return msg + "\n(" + encode(msg, d) + ")";
+        return msg + "(" + encode(msg, d) + ")";
     }
     public boolean verify(String signedMsg) {
         // Найти начало и конец зашифрованного сообщения в скобках
@@ -133,7 +133,7 @@ public class RSA {
         int endIndex = signedMsg.lastIndexOf(")");
 
         // Извлечь сообщение msg
-        String msg = signedMsg.substring(0, startIndex - 1);
+        String msg = signedMsg.substring(0, startIndex);
 
         // Извлечь зашифрованное сообщение
         String encodedMsg = signedMsg.substring(startIndex + 1, endIndex);
