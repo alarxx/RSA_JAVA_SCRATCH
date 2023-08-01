@@ -23,7 +23,7 @@ k * phi(n) + 1 = e * d, e - given open key,
 How to find d?  
 
 First Method:  
-d = (k * phi(n) + 1) / k  
+d = (k * phi(n) + 1) / e  
 
 Second Method:  
 d * e = 1 mod n  
