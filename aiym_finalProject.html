@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FinalProject</title>
+</head>
+<body>
+
+    <h1>Random Numbers Generator</h1>
+
+    <form id="randomForm">
+        <label>От:</label>
+        <input type="number" id="min" required value="1">
+
+        <label>До:</label>
+        <input type="number" id="max" required value="100">
+
+        <input type="submit" value="Сгенерировать">
+    </form>
+
+    <span id="resultNumber"></span>
+
+
+    <script>
+        class RandomGenerator{
+            // Date.now() - time in milliseconds. 1 s = 1000 ms
+            constructor(
+                seed=42, 
+                a=1664525, 
+                bias=1013904223, 
+                max=Math.pow(2, 32), // 4,294,967,296
+                isSeedEnhanced=true, 
+            ){
+                console.log({seed, a, bias, max});
+                this.seed = seed;
+                this.a = a;
+                this.bias = bias;
+                this.max = max;
+                this.isSeedEnhanced = isSeedEnhanced;
+            }
+            next(){
+                if(this.isSeedEnhanced){
+                    this.seed *= (Date.now() % 1000);
+                }
+                // 1,664,525 * 42 + 1,013,904,223 = 1,083,814,273
+                this.seed = (this.a * this.seed + this.bias) % this.max;
+                return this.seed;
+            }
+            random(){
+                // this.next(), this.seed < this.max
+                return this.next() / this.max; // [0; 1)
+            }
+
+        }
+
+         function convertRanges(min, max, value){
+            return min + (value * (max - min));
+        }   
+    </script>
+
+
+    <script>
+        (function(){
+
+            // const random = new RandomGenerator(0, 1, 1, 10, false);
+            const random = new RandomGenerator();
+
+            for(let i=0; i<20; i++){
+                console.log(random.random());
+            }
+
+
+            const randomForm = document.getElementById('randomForm');
+            randomForm.addEventListener('submit', function (event) {
+                event.preventDefault(); // Предотвращаем отправку формы по умолчанию
+
+                // Получаем значения полей формы
+                const min = Number(document.getElementById('min').value);
+                const max = Number(document.getElementById('max').value);
+
+                const randomNumber = Math.round(convertRanges(min, max, random.random()));
+
+                const resultNumber = document.getElementById('resultNumber');
+                resultNumber.textContent = `Сгенерированное число: ${randomNumber}`;
+
+            });
+
+        })()
+    </script>
+
+
+    <h1>Password Generator</h1>
+
+    <form id="randomPasswordForm">
+        <label>Количество символов</label>
+        <input type="number" id="symbols" required value="10">
+
+        <input type="submit" value="Сгенерировать">
+    </form>
+
+    <span id="resultPassword"></span>
+
+
+    <script>
+        (function(){
+
+            const random = new RandomGenerator();
+
+            const randomForm = document.getElementById('randomPasswordForm');
+                randomForm.addEventListener('submit', function (event) {
+                event.preventDefault(); // Предотвращаем отправку формы по умолчанию
+
+                // Получаем значения полей формы
+                const symbols = Number(document.getElementById('symbols').value);
+
+
+                let password = "";
+                for(let i=0; i<symbols; i++){
+                    const randomNumber = Math.round(convertRanges(33, 126, random.random()));
+                    console.log(randomNumber);
+                    password += String.fromCharCode(randomNumber);
+                }
+
+                const resultPassword = document.getElementById('resultPassword');
+                resultPassword.textContent = `Сгенерированный пароль: ${password}`;
+            });
+                
+        })()
+    </script>
+
+</body> 
+</html>

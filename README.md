@@ -1,5 +1,7 @@
 # RSA_JAVA_SCRATCH  
-Учебный проект. Реализация RSA на Java.  
+Учебный проект. Реализация RSA на Java. 
+
++aiym's project with random number generator and password generator.
 
 m - integer message  
 p1, p2 - random big prime numbers  
