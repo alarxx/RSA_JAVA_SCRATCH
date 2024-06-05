@@ -8,7 +8,8 @@ Application of Number Theory, modular arithmetic and big numbers to implement RS
 m - integer message  
 p1, p2 - random big prime numbers  
 n = p1 * p2  
-phi(n) = (p1 - 1) x (p2 - 1) - Euler's Function  
+---Euler's Totient Function---
+phi(n) = phi(p1) * phi(p2) = (p1 - 1) x (p2 - 1)
 
 e - public exponent (encrypt)
 1 < e < phi(n), and gcd(e, phi(n)) = 1
