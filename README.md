@@ -10,10 +10,13 @@ p1, p2 - random big prime numbers
 n = p1 * p2  
 phi(n) = (p1 - 1) x (p2 - 1) - Euler's Function  
 
+e - public exponent (encrypt)
+1 < e < phi(n), and gcd(e, phi(n)) = 1
+
 m^e mod n = c, c - encrypted message  
 
 Suppose:  
-c^d mon n = m  
+c^d mod n = m  
 m^(e * d) mod n = m,  
 (n, e) - Public key,  
 (n, d) - Private key.  
