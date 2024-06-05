@@ -3,7 +3,7 @@
 
 +aiym's project with random number generator and password generator.
 
-Application of modular arithmetic and big numbers to implement RSA encryption and electronic digital signature
+Application of Number Theory, modular arithmetic and big numbers to implement RSA encryption and electronic digital signature
 
 m - integer message  
 p1, p2 - random big prime numbers  
